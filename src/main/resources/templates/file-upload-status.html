@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upload CSV File Example</title>
+
+    <!--Bootstrap 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="col-10 mx-auto">
+    <h1>File Upload Status</h1>
+    <!--display error if any-->
+    <div class="alert alert-danger" role="alert" th:if="${!status}">
+        <strong>Error:</strong>
+        <span th:text="${message}"></span>
+    </div>
+
+    <!--display users list-->
+    <table class="table table-striped" th:if="${status}">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">MSISDN</th>
+            <th scope="col">SIM_TYPE</th>
+            <th scope="col">NAME</th>
+            <th scope="col">DATE_OF_BIRTH</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">ADDRESS</th>
+            <th scope="col">ID_NUMBER</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, i : ${users}" th:classappend="${user.isValid()} ? 'text-success' : 'text-danger'">
+            <th scope="row" th:text="${i.index + 1}"></th>
+            <td th:text="${user.getMsisdn()}"></td>
+            <td th:text="${user.getSymType()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getDateOfBirth()}"></td>
+            <td th:text="${user.getGender()}"></td>
+            <td th:text="${user.getAddress()}"></td>
+            <td th:text="${user.getId()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
